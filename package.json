@@ -1,0 +1,18 @@
+{
+  "name": "kissplus",
+  "version": "1.0.0",
+  "description": "Tampermonkey script to improve viewing experience on kisscartoon/kissanime sites.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.37.0",
+    "webpack-cli": "^4.7.0",
+    "webpack-merge": "^5.7.3"
+  }
+}
