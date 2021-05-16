@@ -21,11 +21,6 @@ export const types = {
     event: {
         TRIGGER: 'trigger',
         CALLBACK: 'callback'
-    },
-
-    request: {
-        FUNCTION: 'function',
-        EVENT: 'event'
     }
 }
 

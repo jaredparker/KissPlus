@@ -14,10 +14,6 @@ import {
 
 export default class Dictionaries {
 
-    constructor(){
-
-    }
-
     create( name ){
 
         // Cannot overwrite existing method
@@ -62,15 +58,15 @@ class Dictionary {
     // @ Remove item in dictionary
     remove( id ){
         const dict = this.get();
-        delete dict[id];
+        delete dict[ id ];
 
         // Delete whole dictionary in storage if empty
         if( Object.keys( dict ).length <= 0 ){
-            GM_deleteValue( varName );
+            GM_deleteValue( this.varName );
 
         // Remove item in dictionary
         } else {
-            GM_setObjValue( varName, dict, false );
+            GM_setObjValue( this.varName, dict, false );
         }
     }
 }

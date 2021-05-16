@@ -14,7 +14,7 @@ import {
 
 // ### MAIN ###
 
-export class Listener {
+export default class Listener {
 
     constructor( catergory ){
         this.catergory = catergory;
@@ -44,7 +44,6 @@ export class Listener {
             }
 
             const data = await handler( event, done );
-            console.log('return data', data);
             if( data ){ done( data ); }
         });
         return eventListener;
