@@ -2,8 +2,8 @@
 // Format name to use for storage
 export const storageVariables = {
     event: ( catergory, event ) => `__EVENT__${catergory}__${event}__`,
-    dict:  ( name ) => `__DICTIONARY__${name}__`,
-    tab:   () => `__TYPEDATA__`
+    dict:  ( name             ) => `__DICTIONARY__${name}__`,
+    tab:   (                  ) => `__TYPEDATA__`
 }
 
 export const types = {

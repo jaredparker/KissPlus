@@ -1,14 +1,8 @@
 
 // ### IMPORTS ###
 
-import {
-    GM_getObjValue,
-    GM_updateObjValue
-} from './gm-extras.js';
-
-import {
-    storageVariables
-} from './config.js';
+import { GM_getObjValue, GM_updateObjValue } from './gm-extras.js';
+import { storageVariables } from './config.js';
 
 // ### MAIN ###
 
