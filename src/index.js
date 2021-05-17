@@ -20,6 +20,6 @@ new URLDataRequest( window.location.href ).request( 'videoURL', function( data )
 
 console.log( GM_getStorage() );
 
-new URLDataRequest( window.location.href ).response( 'videoURL', {cool: 'data'} );
+new URLDataRequest( window.location.href ).respond( 'videoURL', {cool: 'data'} );
 
 console.log( GM_getStorage() );

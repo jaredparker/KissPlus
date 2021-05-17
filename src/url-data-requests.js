@@ -56,7 +56,7 @@ export default class URLDataRequest {
         });
     }
 
-    response( requestName, data ){
+    respond( requestName, data ){
         if( !this.check( requestName ) ){ return; }
 
         const requests = this.#getRequests();
