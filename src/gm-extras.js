@@ -1,4 +1,6 @@
 
+// Support to store objects
+
 export function GM_getStorage(){
     const keys = GM_listValues();
     const storage = {};
@@ -44,6 +46,8 @@ export function GM_removeObjValue( name, key ){
     const obj = GM_getObjValue( name );
     if( obj ){ delete obj[key]; }
 }
+
+// Tabs
 
 export function GM_findTab( filter, cb ){
 
