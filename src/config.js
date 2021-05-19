@@ -51,3 +51,5 @@ export const sizes = {
     nextButtonPadding: '20px',
     nextButtonHover:   '10px'
 }
+
+export const awaitInterval = 300;
