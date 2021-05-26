@@ -6,7 +6,8 @@ import Dictionaries      from './dictionaries.js';
 import Listener          from './events.js';
 import URLDataRequest    from './url-data-requests.js';
 import { setTabType, removeTabType, findTabType } from './tab-types.js';
-import { awaitUndefined } from './await.js';
+import { awaitElement, awaitUndefined } from './await.js';
+import { TimeFrame } from './time-frame.js';
 
 // ### MAIN ###
 
@@ -14,14 +15,17 @@ const dictionaries = new Dictionaries()
     .create( 'videos' )
     .create( 'series' );
 
-console.log('Load');
+console.log( 'new version' );
 
-let variable = undefined;
+awaitElement( 'video' ).then( ([video]) => {
 
-awaitUndefined( () => variable ).then( function(){
-    console.log( 'variable set: ', ...arguments );
+    console.log(video);
+
+    new TimeFrame( video, 10, 15 )
+        .on( 'enter', () => {
+            console.log('entered');
+        })
+        .on( 'exit', () => {
+            console.log('exited');
+        })
 });
-
-setTimeout( () => {
-    variable = 'Hello World!';
-}, 2000 );

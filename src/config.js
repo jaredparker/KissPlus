@@ -53,3 +53,4 @@ export const sizes = {
 }
 
 export const awaitInterval = 300;
+export const timeoutLeeway = 0.08;
