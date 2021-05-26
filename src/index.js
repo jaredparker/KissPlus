@@ -2,30 +2,19 @@
 // ### IMPORTS ###
 
 import { GM_getStorage } from './gm-extras.js';
-import Dictionaries      from './dictionaries.js';
-import Listener          from './events.js';
-import URLDataRequest    from './url-data-requests.js';
-import { setTabType, removeTabType, findTabType } from './tab-types.js';
-import { awaitElement, awaitUndefined } from './await.js';
-import { TimeFrame } from './time-frame.js';
+import * as seriesInfo   from './pages/seriesInfo.js';
 
 // ### MAIN ###
 
-const dictionaries = new Dictionaries()
-    .create( 'videos' )
-    .create( 'series' );
+console.log( 'Storage 0s', GM_getStorage() );
+setTimeout( () => console.log( 'Storage 1s', GM_getStorage() ), 1000 );
 
-console.log( 'new version' );
+// init
+$(document).ready( function(){
 
-awaitElement( 'video' ).then( ([video]) => {
+    if( seriesInfo.check() ){
+        console.log('# PAGE: Series Info #');
+        seriesInfo.execute();
+    }
 
-    console.log(video);
-
-    new TimeFrame( video, 10, 15 )
-        .on( 'enter', () => {
-            console.log('entered');
-        })
-        .on( 'exit', () => {
-            console.log('exited');
-        })
 });
