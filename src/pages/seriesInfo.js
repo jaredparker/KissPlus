@@ -11,7 +11,13 @@ const dictionaries = new Dictionaries()
 // ### MAIN ###
 
 function getCoverImage(){
-    return $('#leftside > .bigBarContainer > .barContent img');
+    // kisscartoon & kissanime
+    const coverA = $('#rightside > :first-child img');
+
+    // kimcartoon
+    const coverB = $('#leftside > .bigBarContainer > .barContent > :first-child img');
+
+    return ( coverA.length ) ? coverA : coverB;
 }
 
 export function check(){
