@@ -9,7 +9,7 @@ import { storageVariables } from "./config";
 const typeData = storageVariables.tab();
 
 // ### MAIN ###
-// - Used to check if tabs open
+// ? Used to check if tabs open
 
 export function setTabType( catergory, type ){
     return new Promise( ( resolve, reject ) => {

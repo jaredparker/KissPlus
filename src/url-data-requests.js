@@ -10,9 +10,9 @@ const dictionaries = new Dictionaries()
     .create( 'requestURLs');
 
 // ### MAIN ###
-
-// @ Used for continued communication with new tabs
+// ? Used for continued communication with new tabs
 // ~ Uses events to transmit data
+
 export default class URLDataRequest {
 
     constructor( url ){
@@ -67,7 +67,7 @@ export default class URLDataRequest {
             .done( request.event.name, request.event.id, data );
     }
 
-    // @ Checks if there is an open request
+    // Checks if there is an open request
     check( requestName ){
         return ( this.#getRequest( requestName ) ) ? true : false;
     }

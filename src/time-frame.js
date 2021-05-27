@@ -4,7 +4,7 @@
 import { timeoutLeeway } from "./config";
 
 // ### MAIN ###
-// @ Used to show elements at different time stamps
+// ? Used to show elements at different time stamps
 
 export class TimeFrame {
 
@@ -19,7 +19,7 @@ export class TimeFrame {
             'exit': []
         };
 
-        // - for when user seeks
+        // ? Used when user seeks
         this.lastState = -1; // -1/0/1 = before/active/after
 
         const $video = $(video);
@@ -46,7 +46,7 @@ export class TimeFrame {
         return this; // Supports Chaining
     }
 
-    // - Internal -
+    // - INTERNAL -
 
     #enter(){
         this.lastState = 0;
@@ -63,7 +63,7 @@ export class TimeFrame {
         for( let cb of this.events[event] ){ cb(); }
     }
 
-    // - External -
+    // - EXTERNAL -
 
     #played(){
         this.#setNextEventTimeout();

@@ -29,7 +29,7 @@ export function execute(){
 
     // Src doesn't include site's origin
     } catch {
-        var coverHref = `${window.origin}${coverSrc}`
+        var coverHref = `${window.origin}${coverSrc}`;
     }
 
     // Save cover image url

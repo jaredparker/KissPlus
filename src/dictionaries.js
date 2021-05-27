@@ -5,6 +5,7 @@ import { GM_getObjValue, GM_updateObjValue } from './gm-extras.js';
 import { storageVariables } from './config.js';
 
 // ### MAIN ###
+// ? Used to cleanly store and lookup data
 
 export default class Dictionaries {
 
@@ -25,7 +26,7 @@ class Dictionary {
         this.varName = storageVariables.dict( name );
     }
 
-    // @ Get item(s) in dictionary
+    // Get item(s) in dictionary
     get( id ){
         const dict = GM_getObjValue( this.varName );
 
@@ -39,17 +40,17 @@ class Dictionary {
         }
     }
 
-    // @ Set(replace) item in dictionary
+    // Set(replace) item in dictionary
     set( id, data ){
         GM_updateObjValue( this.varName, {[id]: data}, false );
     }
 
-    // @ Update item in dictionary
+    // Update item in dictionary
     update( id, data ){
         GM_updateObjValue( this.varName, {[id]: data}, true );
     }
 
-    // @ Remove item in dictionary
+    // Remove item in dictionary
     remove( id ){
         const dict = this.get();
         delete dict[ id ];

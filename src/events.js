@@ -5,6 +5,7 @@ import { GM_getObjValue, GM_setObjValue } from './gm-extras.js';
 import { storageVariables, types } from './config.js';
 
 // ### MAIN ###
+// ? Used for communication across tabs
 
 export default class Listener {
 
@@ -130,7 +131,7 @@ export default class Listener {
 
 }
 
-// @ Event listener wrapper to the GM_addValueChangeListener
+// ~ Event listener wrapper to the GM_addValueChangeListener
 class EventListener {
 
     constructor( catergory, eventName, filter, handler ){
