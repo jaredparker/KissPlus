@@ -6,12 +6,50 @@ import Dictionaries from '../lib/dictionaries.js';
 // ### INIT ###
 
 const dictionaries = new Dictionaries()
+    .create( 'series' )
     .create( 'videos' );
 
 // ### MAIN ###
 
 // - DATA STRUCTURES -
 
+export class SeriesData {
+    constructor( id ){
+        this.id = id;
+    }
+
+    create(){
+        this.id   = getSeriesID();
+        this.name = getSeriesName();
+
+        return this; // Support chaining
+    }
+
+    add( data ){
+        Object.keys( data ).map( key =>
+            this[key] = data[key]
+        );
+
+        return this; // Support chaining
+    }
+
+    get(){
+        this.add( dictionaries.series.get( this.id ) || {} );
+
+        return this; // Support chaining
+    }
+    
+    store(){
+        const data = {};
+        Object.keys( this ).map( key =>
+            data[key] = this[key]
+        );
+
+        dictionaries.series.update( this.id, data );
+
+        return this; // Support chaining
+    }
+}
 export class VideoData {
     constructor( videoURL ){
         this.videoURL       = videoURL;
@@ -39,7 +77,7 @@ export class VideoData {
     store(){
         dictionaries.videos.update( this.videoURL, {
             seriesID: this.seriesID,
-            episode: this.episode
+            episode:  this.episode
         });
 
         return this; // Support chaining
@@ -57,10 +95,37 @@ export function getSeriesID(){
     const seriesHref  = (( seriesTextA.length == 1 ) ? seriesTextA : seriesTextB ).attr('href');
 
     const url  = new URL(seriesHref);
-    const path = url.pathname.split('/');
-    const id   = path[2].split('.')[0];
+    const id   = parseSeriesURL( url );
     
     return id;
+}
+
+export function parseSeriesURL( url ){
+    const path = url.pathname.split('/');
+    const id   = path[2].split('.')[0];
+
+    return id;
+}
+
+export function getSeriesName(){
+
+    // kisscartoon & kissanime
+    const seriesTextA = $('#navsubbar > p > a strong');
+    if( seriesTextA.length ){
+        return seriesTextA.text();
+    }
+
+    // kimcartoon.si
+    const seriesTextB = $('.watch_title');
+    if( seriesTextB.length ){
+        return seriesTextB.text().replace(/(^Watch | online free$)/g, '');
+    }
+
+    // kimcartoon.li
+    const seriesTextC = $('#navsubbar > p > a');
+    if( seriesTextC.length ){
+        return seriesTextC.text().split('\n')[2].trim();
+    }
 }
 
 export function getEpisodeData(){

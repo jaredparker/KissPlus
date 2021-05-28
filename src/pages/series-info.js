@@ -2,6 +2,7 @@
 // ### IMPORTS ###
 
 import Dictionaries from '../lib/dictionaries.js';
+import { parseSeriesURL, SeriesData } from '../utils/series-data.js';
 
 // ### INIT ###
 
@@ -11,13 +12,12 @@ const dictionaries = new Dictionaries()
 // ### MAIN ###
 
 export function check(){
-    console.log(getCoverImage());
     return getCoverImage().length == 1;
 }
 
 export function execute(){
 
-    const seriesID = window.location.pathname.split('/')[2].split('.')[0];
+    const seriesID = parseSeriesURL(window.location);
     const coverSrc = getCoverImage().attr('src');
 
     // Src already includes an origin
@@ -30,9 +30,11 @@ export function execute(){
     }
 
     // Save cover image url
-    dictionaries.series.update( seriesID, {
-        coverImage: coverHref
-    });
+    new SeriesData( seriesID )
+        .add({
+            coverImage: coverHref
+        })
+        .store();
 }
 
 function getCoverImage(){

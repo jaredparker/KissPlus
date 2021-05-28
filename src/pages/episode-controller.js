@@ -3,7 +3,9 @@
 
 import Dictionaries from '../lib/dictionaries.js';
 import { awaitElement } from '../lib/await.js';
-import { getEpisodeData, VideoData } from '../utils/series-data.js';
+import { getSeriesID, SeriesData, VideoData } from '../utils/series-data.js';
+import { findTabType, setTabType } from '../lib/tab-types.js';
+import { types } from '../config.js';
 
 // ### INIT ###
 
@@ -23,6 +25,10 @@ export function check(){
 }
 
 export async function execute(){
+
+    // # INIT #
+
+    // - DATA -
     
     // kimcartoon
     let player = $('#my_video_1');
@@ -33,8 +39,8 @@ export async function execute(){
     }
 
     const videoURL = player.attr('src');
+    const seriesID = getSeriesID();
 
-    console.log(videoURL);
-    const videoData = new VideoData( videoURL ).create()
-    console.log(videoData);
+    const videoData  = new VideoData( videoURL ).create().store();
+    const seriesData = new SeriesData( seriesID ).get().create().store();
 }
