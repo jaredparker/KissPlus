@@ -3,6 +3,7 @@
 
 import Dictionaries from '../lib/dictionaries.js';
 import { awaitElement } from '../lib/await.js';
+import { getEpisodeData, VideoData } from '../utils/series-data.js';
 
 // ### INIT ###
 
@@ -15,8 +16,8 @@ export function check(){
     // kisscartoon & kissanime
     const playerA = $('#movie-player #player_container');
 
-    // kimcartoon
-    const playerB = $('#my_video_1');
+    // kimcartoon (Non-beta servers)
+    const playerB = $('iframe#my_video_1');
 
     return !!playerA.length || !!playerB.length;
 }
@@ -34,4 +35,6 @@ export async function execute(){
     const videoURL = player.attr('src');
 
     console.log(videoURL);
+    const videoData = new VideoData( videoURL ).create()
+    console.log(videoData);
 }
