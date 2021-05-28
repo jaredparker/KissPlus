@@ -11,6 +11,7 @@ const dictionaries = new Dictionaries()
 // ### MAIN ###
 
 export function check(){
+    console.log(getCoverImage());
     return getCoverImage().length == 1;
 }
 
@@ -38,8 +39,11 @@ function getCoverImage(){
     // kisscartoon & kissanime
     const coverA = $('#rightside > :first-child img');
 
-    // kimcartoon
+    // kimcartoon.li
     const coverB = $('#leftside > .bigBarContainer > .barContent > :first-child img');
 
-    return ( coverA.length ) ? coverA : coverB;
+    // kimcartoon.si
+    const coverC = $('#leftside > .bigBarContainer:first-child .left_movie img');
+
+    return ( coverA.length==1 ) ? coverA : ( coverB.length==1 ) ? coverB : coverC;
 }
