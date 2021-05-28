@@ -43,4 +43,23 @@ export async function execute(){
 
     const videoData  = new VideoData( videoURL ).create().store();
     const seriesData = new SeriesData( seriesID ).get().create().store();
+
+    // - TABS -
+
+    setTabType( seriesID, types.tab.CONTROLLER );
+
+    // - EVENTS -
+
+    // # MAIN #
+
+    async function openPlayer(){
+        const tab = await findTabType( seriesID, types.tab.PLAYER );
+        if( tab ){
+
+        } else {
+            GM_openInTab( videoURL, { active: true, setParent: true } );
+        }
+    }
+
+    openPlayer();
 }

@@ -4,6 +4,7 @@
 import { GM_getStorage } from './lib/gm-extras.js';
 import * as seriesInfo   from './pages/series-info.js';
 import * as episodeController from './pages/episode-controller.js';
+import * as videoPlayer from './pages/video-player.js';
 
 // ### MAIN ###
 
@@ -20,6 +21,10 @@ $(document).ready( function(){
     } else if( episodeController.check() ){
         console.log('# PAGE: Episode Controller #');
         episodeController.execute();
+
+    } else if( videoPlayer.check() ){
+        console.log('# PAGE: Episode Player #');
+        videoPlayer.execute();
     }
 
 });
