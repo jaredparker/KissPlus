@@ -2,7 +2,7 @@
 // ### IMPORTS ###
 
 import Dictionaries from '../lib/dictionaries.js';
-import { awaitElement } from '../await.js';
+import { awaitElement } from '../lib/await.js';
 
 // ### INIT ###
 
