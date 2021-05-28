@@ -10,16 +10,6 @@ const dictionaries = new Dictionaries()
 
 // ### MAIN ###
 
-function getCoverImage(){
-    // kisscartoon & kissanime
-    const coverA = $('#rightside > :first-child img');
-
-    // kimcartoon
-    const coverB = $('#leftside > .bigBarContainer > .barContent > :first-child img');
-
-    return ( coverA.length ) ? coverA : coverB;
-}
-
 export function check(){
     return getCoverImage().length == 1;
 }
@@ -42,4 +32,14 @@ export function execute(){
     dictionaries.series.update( seriesID, {
         coverImage: coverHref
     });
-}   
+}
+
+function getCoverImage(){
+    // kisscartoon & kissanime
+    const coverA = $('#rightside > :first-child img');
+
+    // kimcartoon
+    const coverB = $('#leftside > .bigBarContainer > .barContent > :first-child img');
+
+    return ( coverA.length ) ? coverA : coverB;
+}
