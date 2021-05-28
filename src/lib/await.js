@@ -1,7 +1,7 @@
 
 // ### IMPORTS ###
 
-import { awaitInterval } from './config.js';
+import { awaitInterval } from '../config.js';
 
 // ### MAIN ###
 

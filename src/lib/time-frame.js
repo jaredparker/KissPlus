@@ -1,7 +1,7 @@
 
 // ### IMPORTS ###
 
-import { timeoutLeeway } from "./config";
+import { timeoutLeeway } from "../config";
 
 // ### MAIN ###
 // ? Used to show elements at different time stamps

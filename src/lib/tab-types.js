@@ -2,7 +2,7 @@
 // ### IMPORTS ###
 
 import { GM_findTab } from "./gm-extras";
-import { storageVariables } from "./config";
+import { storageVariables } from "../config";
 
 // ### INIT ###
 

@@ -1,7 +1,7 @@
 
 // ### IMPORTS ###
 
-import { GM_getStorage } from './gm-extras.js';
+import { GM_getStorage } from './lib/gm-extras.js';
 import * as seriesInfo   from './pages/series-info.js';
 import * as episodeController from './pages/episode-controller.js';
 

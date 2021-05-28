@@ -1,7 +1,7 @@
 
 // ### IMPORTS ###
 
-import Dictionaries from '../dictionaries.js';
+import Dictionaries from '../lib/dictionaries.js';
 
 // ### INIT ###
 
