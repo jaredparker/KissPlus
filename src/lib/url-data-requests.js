@@ -16,7 +16,8 @@ const dictionaries = new Dictionaries()
 export default class URLDataRequest {
 
     constructor( url ){
-        this.url = url;
+        const _url = new URL(url);
+        this.url = `${_url.origin}${_url.pathname}`;
     }
 
     // ~ Takes responseMethod as function or event.info

@@ -9,6 +9,7 @@ import styles from '../styles/open-video.scss';
 // ### MAIN ###
 
 export default class OpenVideo extends Component {
+    
     constructor( appendTo, options ){
         styles.params = {
             'COVER_IMAGE': options.coverImage
@@ -55,7 +56,7 @@ export default class OpenVideo extends Component {
                         {
                             // Text
                             tag: 'h1',
-                            classes: [ styles.locals.text ],
+                            classes: [ styles.locals.info ],
                             text: 'Open Video Player'
                         }
                     ]
