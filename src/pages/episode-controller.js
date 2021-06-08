@@ -1,11 +1,16 @@
 
 // ### IMPORTS ###
 
+import { types } from '../config.js';
+
 import Dictionaries from '../lib/dictionaries.js';
+import Listener from '../lib/events.js';
+
 import { awaitElement } from '../lib/await.js';
 import { getSeriesID, SeriesData, VideoData } from '../utils/series-data.js';
 import { findTabType, setTabType } from '../lib/tab-types.js';
-import { types } from '../config.js';
+
+import OpenVideoComponent from '../components/open-video.js';
 
 // ### INIT ###
 
@@ -46,20 +51,33 @@ export async function execute(){
 
     // - TABS -
 
-    setTabType( seriesID, types.tab.CONTROLLER );
+    setTabType( seriesData.id, types.tab.CONTROLLER );
 
     // - EVENTS -
 
     // # MAIN #
 
     async function openPlayer(){
-        const tab = await findTabType( seriesID, types.tab.PLAYER );
-        if( tab ){
+        const tab = await findTabType( seriesData.id, types.tab.PLAYER );
 
+        // Update Player tab
+        if( tab ){
+            new Listener( seriesData.id )
+                .trigger( 'focusPlayer' )
+                .trigger( 'playNewVideo', { videoURL } );
+
+        // Open new Player tab
         } else {
             GM_openInTab( videoURL, { active: true, setParent: true } );
         }
     }
 
-    openPlayer();
+    new OpenVideoComponent( '#divContentVideo', {
+        hide: '#my_video_1',
+        coverImage: seriesData.coverImage
+    })
+        .on( 'clickedOpenVideo', openPlayer )
+        .on( 'clickedClose', function(){
+            this.hide();
+        });
 }

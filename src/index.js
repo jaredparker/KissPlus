@@ -23,7 +23,7 @@ $(document).ready( function(){
         episodeController.execute();
 
     } else if( videoPlayer.check() ){
-        console.log('# PAGE: Episode Player #');
+        console.log('# PAGE: Video Player #');
         videoPlayer.execute();
     }
 
