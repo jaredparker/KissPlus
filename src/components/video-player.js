@@ -28,17 +28,25 @@ export default class VideoPlayer extends Component {
         
         if( this.coverImage ){
             videoTitle.push({
+                // Video Title Cover Image
                 tag: 'img',
                 src: this.coverImage
             })
         }
         videoTitle.push({
-            tag: 'h1',
-            text: this.title
-        });
-        videoTitle.push({
-            tag: 'h2',
-            text: this.subtitle
+            // Video Title Text
+            tag: 'div',
+            classes: [ styles.locals.titleText ],
+            children: [
+                {
+                    tag: 'h1',
+                    text: this.title
+                },
+                {
+                    tag: 'h2',
+                    text: this.subtitle
+                }
+            ]
         });
 
         // - EPISODE BUTTONS -
