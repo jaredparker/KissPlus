@@ -3,7 +3,7 @@
 
 import Dictionaries from '../lib/dictionaries.js';
 
-import { parseSeriesURL, SeriesData } from '../utils/series-data.js';
+import { SeriesData, getFullURL, parseSeriesURL } from '../utils/series-data.js';
 
 // ### INIT ###
 
@@ -21,20 +21,11 @@ export function execute(){
     const seriesID = parseSeriesURL(window.location);
     const coverSrc = getCoverImage().attr('src');
 
-    // Src already includes an origin
-    try {
-        var coverHref = new URL(coverSrc).href;
-
-    // Src doesn't include site's origin
-    } catch {
-        var coverHref = `${window.origin}${coverSrc}`;
-    }
+    const coverImage = getFullURL( coverSrc );
 
     // Save cover image url
     new SeriesData( seriesID )
-        .add({
-            coverImage: coverHref
-        })
+        .add( {coverImage} )
         .store();
 }
 

@@ -1,0 +1,88 @@
+
+@import 'config';
+
+.wrapper {
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+    
+    pointer-events: none;
+}
+
+.episodeButtons {
+    position: absolute;
+    bottom: $padd-edge;
+    right: $padd-edge;
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+
+    pointer-events: auto;
+
+    > * {
+        margin-left: $padd-small;
+
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+}
+
+.episodeButton {
+    height: 60px;
+    line-height: normal;
+    padding: $padd-normal;
+    border-radius: 5px;
+
+    text-align: center;
+    box-sizing: border-box;
+    white-space: nowrap;
+
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+
+    transition: margin .3s, background-color .3s, width 1s, padding 1s;
+
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5);
+
+    &:hover {
+        cursor: pointer;
+        margin-bottom: $padd-tiny;
+    }
+
+    &.prev {
+        color: white;
+        background-color: rgba( 50, 50, 50, .5 );
+
+        &:hover {
+            background-color: rgba( 50, 50, 50, .9 );
+        }
+    }
+
+    &.next {
+        /* Progress bar effect */
+        background: linear-gradient( to right, white 49%, lightgrey 49%, transparent 50% );
+        background-size: 208% 100%;
+        background-position: 100% 0px;
+        background-repeat: no-repeat;
+
+        color: black;
+        background-color: rgba( 255, 255, 255, .5 );
+
+        &:hover {
+            background-color: rgba( 255, 255, 255, .9 );
+        }
+    }
+}
+
+@keyframes slide {
+    to {
+        background-position: 0% 0px;
+    }
+}
