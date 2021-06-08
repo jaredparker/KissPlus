@@ -2,6 +2,7 @@
 // ### IMPORTS ###
 
 import Dictionaries from '../lib/dictionaries.js';
+
 import { parseSeriesURL, SeriesData } from '../utils/series-data.js';
 
 // ### INIT ###

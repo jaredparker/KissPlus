@@ -19,7 +19,7 @@
     filter: blur(15px);
     background-image:
         url('%{COVER_IMAGE}'),
-        linear-gradient(135deg, #686de0, #7ed6df); /* Backup if not banner image */;
+        linear-gradient(135deg, #686de0, #7ed6df); /* Backup if no banner image */;
     background-size: cover;
     background-position: center center;
 }

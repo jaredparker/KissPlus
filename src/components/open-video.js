@@ -2,6 +2,7 @@
 // ### IMPORTS ###
 
 import { openPlayerIconURL } from '../config.js';
+
 import Component from '../lib/component.js';
 import styles from '../styles/open-video.scss';
 

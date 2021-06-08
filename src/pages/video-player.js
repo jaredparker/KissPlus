@@ -33,10 +33,6 @@ export async function execute(){
 
     // - TABS -
 
-    console.log(videoData);
-
-    console.log( seriesData.id, types.tab.PLAYER )
-
     setTabType( seriesData.id, types.tab.PLAYER );
 
     // - EVENTS -
