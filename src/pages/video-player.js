@@ -64,7 +64,21 @@ export async function execute(){
 
     // - COMPONENT -
 
+    // Format episode subtitle
+    const episodeText =
+        (videoData.episode.type) ?
+            (videoData.episode.name) ?
+                `${videoData.episode.type}: ${videoData.episode.name}` // Got Episode type and name! ( Shorts: The CrossEyed Ducks Car )
+            :
+                videoData.episode.type // Usually if just '_pilot'
+        :
+            videoData.episode.name // Episode type not specified
+
     new VideoPlayerComponent( 'body', {
+
+        title: seriesData.name,
+        subtitle: episodeText,
+        coverImage: seriesData.coverImage
 
     })
         .on( 'clickedNextEpisode', function(){

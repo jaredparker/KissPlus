@@ -11,7 +11,49 @@
     height: 100%;
     
     pointer-events: none;
+
+    * {
+        box-sizing: border-box;
+    }
 }
+
+/* ### VIDEO TITLE ### */
+
+.title {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    padding: $padd-edge;
+
+    background: linear-gradient( to bottom, black, rgba(0,0,0,.5) 80%, transparent );
+    color: white;
+
+    img {
+        float: left;
+        height: 180px;
+        margin-right: 50px;
+        border-radius: 5px;
+        box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5);
+    }
+
+    h1 {
+        font-family: Helvetica, sans-serif;
+        font-weight: bold;
+        font-size: 50px;
+        text-shadow: 0px 0px 10px #000000;
+    }
+
+    h2 {
+        font-family: Helvetica, sans-serif;
+        font-size: 30px;
+        color: lightgrey;
+        text-shadow: 0px 0px 10px #000000;
+    }
+}
+
+/* ### EPISODE BUTTONS ### */
 
 .episodeButtons {
     position: absolute;

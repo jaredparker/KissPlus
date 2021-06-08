@@ -11,15 +11,49 @@ import styles from '../styles/video-player.scss';
 export default class VideoPlayer extends Component {
 
     constructor( appendTo, options ){
-        super( appendTo, styles );
+        super( styles );
+
+        this.title = options.title;
+        this.subtitle = options.subtitle;
+        this.coverImage = options.coverImage;
+
+        this.build( appendTo );
     }
 
     render(){
+
+        // - VIDEO TITLE -
+
+        const videoTitle = [];
+        
+        if( this.coverImage ){
+            videoTitle.push({
+                tag: 'img',
+                src: this.coverImage
+            })
+        }
+        videoTitle.push({
+            tag: 'h1',
+            text: this.title
+        });
+        videoTitle.push({
+            tag: 'h2',
+            text: this.subtitle
+        });
+
+        // - EPISODE BUTTONS -
+
         return {
             // Wrapper
             tag: 'div',
             classes: [ styles.locals.wrapper ],
             children: [
+                {
+                    // Video Title
+                    tag: 'div',
+                    classes: [ styles.locals.title ],
+                    children: videoTitle
+                },
                 {
                     // Episode Buttons
                     tag: 'div',

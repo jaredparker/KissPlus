@@ -2,7 +2,7 @@
 // ### MAIN ###
 
 export default class Component {
-    constructor( appendTo, styles ){
+    constructor( styles ){
         this._events = {};
 
         // - Load styles -
@@ -13,12 +13,11 @@ export default class Component {
         }
 
         GM_addStyle( rawStyles );
+    }
 
-        // - Create elements -
-
-        const tree = this.render();
-        this.createNodeChildren( [tree], $(appendTo) );
-        this.tree = tree;
+    build( appendTo ){
+        this.tree = this.render();
+        this.createNodeChildren( [this.tree], $(appendTo) );
     }
 
     // Recursively create new elements

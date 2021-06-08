@@ -14,9 +14,12 @@ export default class OpenVideo extends Component {
         styles.params = {
             'COVER_IMAGE': options.coverImage
         }
-        super( appendTo, styles );
+        super( styles );
 
         this.$hide = $(options.hide);
+
+        this.build( appendTo );
+
         this.show();
     }
 
