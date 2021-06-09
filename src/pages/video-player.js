@@ -76,6 +76,8 @@ export async function execute(){
 
     new VideoPlayerComponent( 'body', {
 
+        video: 'video',
+
         title: seriesData.name,
         subtitle: episodeText,
         coverImage: seriesData.coverImage

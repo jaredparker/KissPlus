@@ -28,5 +28,6 @@ export const types = {
 export const openPlayerIconURL = 'https://i.imgur.com/UmWIUVF.png';
 export const faviconURL        = 'https://i.imgur.com/Zctzveh.png';
 
+export const autoHideWait  = 1500;
 export const awaitInterval = 300;
 export const timeoutLeeway = 0.08;

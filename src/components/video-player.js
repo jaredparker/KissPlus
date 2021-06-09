@@ -1,7 +1,7 @@
 
 // ### IMPORTS ###
 
-import { openPlayerIconURL } from '../config.js';
+import { autoHideWait } from '../config.js';
 
 import Component from '../lib/component.js';
 import styles from '../styles/video-player.scss';
@@ -18,6 +18,45 @@ export default class VideoPlayer extends Component {
         this.coverImage = options.coverImage;
 
         this.build( appendTo );
+
+        // - AUTO HIDE -
+
+        const $video = $( options.video );
+
+        let hideTimeout;
+        
+        const resetTimeout = () => {
+            clearTimeout( hideTimeout );
+            hideTimeout = setTimeout( () => this.hide(), autoHideWait );
+        }
+
+        const onMouseMove = () => {
+            $video.on( 'mousemove', () => {
+                this.show();
+                resetTimeout();
+            });
+        }
+
+        $video.on( 'play', () => {
+            resetTimeout();
+            onMouseMove();
+        });
+
+        $video.on( 'pause', () => {
+            clearTimeout( hideTimeout );
+            $video.off( 'mousemove' );
+            this.show();
+        });
+    }
+
+    hide(){
+        this.tree._element.addClass( styles.locals.hide );
+        this.tree._element.removeClass( styles.locals.show );
+    }
+
+    show(){
+        this.tree._element.addClass( styles.locals.show );
+        this.tree._element.removeClass( styles.locals.hide );
     }
 
     render(){
