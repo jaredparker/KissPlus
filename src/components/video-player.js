@@ -30,6 +30,7 @@ export default class VideoPlayer extends Component {
         const $video = $( this.options.video );
         const video  = $video[0];
 
+        let hoveredVideo = $video.is(':hover');
         let hideTimeout;
         
         const resetTimeout = () => {
@@ -44,15 +45,34 @@ export default class VideoPlayer extends Component {
             });
         }
 
-        $video.on( 'play', () => {
+        function start(){
             resetTimeout();
             onMouseMove();
+        }
+
+        function stop(){
+            clearTimeout( hideTimeout );
+            $video.off( 'mousemove' );
+        }
+
+        $video.on( 'play', () => {
+            if( hoveredVideo ){
+                start();
+            }
         });
 
         $video.on( 'pause', () => {
-            clearTimeout( hideTimeout );
-            $video.off( 'mousemove' );
+            stop();
             this.show();
+        });
+
+        $video.on( 'mouseenter', () => {
+            hoveredVideo = true;
+            start();
+        });
+        $video.on( 'mouseleave', () => {
+            hoveredVideo = false;
+            stop();
         });
 
         // - AUTO PLAY -
@@ -63,7 +83,7 @@ export default class VideoPlayer extends Component {
 
             new TimeFrame( video, duration - 20, duration + 1 )
                 .on( 'enter', () => {
-                    
+
                     const wrapper = this.get( 'nextBtnWrap' );
                     const button  = this.get( 'nextBtn' );
 
