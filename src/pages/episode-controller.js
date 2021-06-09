@@ -58,7 +58,7 @@ export async function execute(){
 
     new Listener( seriesData.id )
 
-        .on.action( 'focusController', () => window.focus )
+        .on.action( 'focusController', () => window.focus() )
         
         .on.request( 'requestEpisode', function( event, done ){
 

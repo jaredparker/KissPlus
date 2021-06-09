@@ -245,6 +245,12 @@ export default class VideoPlayer extends Component {
                     tag: 'div',
                     classes: [ styles.locals.episodeButtons ],
                     children: episodeButtons
+                },
+                {
+                    // Close Button
+                    tag: 'div',
+                    classes: [ styles.locals.close ],
+                    click: () => this.trigger( 'clickedClose' )
                 }
             ]
 

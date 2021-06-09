@@ -86,20 +86,37 @@ export async function execute(){
         nextEp: !!videoData.controllerURLs[ types.episode.NEXT ]
 
     })
+        // Episode Buttons
         .on( 'clickedNextEpisode', function(){
             requestEpisode( types.episode.NEXT );
             startEpisode( types.episode.NEXT );
         })
-
         .on( 'clickedPrevEpisode', function(){
             requestEpisode( types.episode.PREVIOUS );
             startEpisode( types.episode.PREVIOUS );
         })
 
+        // Close Button
+        .on( 'clickedClose', async function(){
+            const tab = await findTabType( seriesData.id, types.tab.CONTROLLER );
+
+            // Focus Player tab
+            if( tab != null ){
+                new Listener( seriesData.id )
+                    .trigger( 'focusController' );
+                window.close();
+
+            // Open new Player tab
+            } else {
+                GM_openInTab( videoData.controllerURLs[ types.episode.CURRENT ], { active: true, setParent: true } );
+                window.close();
+            }
+        })
+
+        // Auto play
         .on( 'prepareNextVideo', function(){
             requestEpisode( types.episode.NEXT );
         })
-
         .on( 'startNextVideo', function(){
             startEpisode( types.episode.NEXT );
         });
