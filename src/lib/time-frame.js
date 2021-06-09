@@ -6,7 +6,7 @@ import { timeoutLeeway } from '../config';
 // ### MAIN ###
 // ? Used to show elements at different time stamps
 
-export class TimeFrame {
+export default class TimeFrame {
 
     constructor( video, startTime, endTime ){
 

@@ -17,6 +17,13 @@
     }
 }
 
+/* ### HIDE/SHOW ### */
+
+.show.episodeButton {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility .5s, opacity .5s, width .5s;    
+}
 .show .episodeButton,
 .show .title {
     visibility: visible;
@@ -24,11 +31,23 @@
     transition: visibility .1s, opacity .1s, width .1s;  
 }
 
-.hide .episodeButton,
+.hide .episodeButton:not(.show),
 .hide .title {
     visibility: visible;
     opacity: 0;
     transition: visibility 1s, opacity 1s, width 1s, margin 1s;
+}
+
+/* Move prev btn to right */
+
+.episodeButton.next {
+    width: 200px;
+    overflow: hidden;
+}
+
+.hide .episodeButton.prev.show + .episodeButton.next:not(.show) {
+    width: 0;
+    margin-left: 0;
 }
 
 /* ### VIDEO TITLE ### */
@@ -161,4 +180,41 @@
     to {
         background-position: 0% 0px;
     }
+}
+
+/* # SPINNER # */
+
+.episodeButton {
+
+    button {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &.prev .spinner {
+        border: 3px solid white;
+        border-top: 3px solid transparent;
+    }
+    &.next .spinner {
+        border: 3px solid black;
+        border-top: 3px solid transparent;
+    }
+}
+
+.spinner {
+    width: 17px;
+    height: 17px;
+
+    border-radius: 50%;
+
+    margin-right: 8px;
+
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

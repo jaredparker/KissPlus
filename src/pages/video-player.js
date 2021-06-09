@@ -91,6 +91,14 @@ export async function execute(){
         .on( 'clickedPrevEpisode', function(){
             requestEpisode( types.episode.PREVIOUS );
             startEpisode( types.episode.PREVIOUS );
+        })
+
+        .on( 'prepareNextVideo', function(){
+            requestEpisode( types.episode.NEXT );
+        })
+
+        .on( 'startNextVideo', function(){
+            startEpisode( types.episode.NEXT );
         });
 
     async function requestEpisode( type ){
@@ -102,7 +110,6 @@ export async function execute(){
         if( tab != null ){
             new Listener( seriesData.id )
                 .trigger( 'requestEpisode', { url: controllerURL }, event => {
-                    console.log(event)
                     videoData.videoURLs[ type ] = event.data.videoURL
                 })
 
@@ -110,7 +117,6 @@ export async function execute(){
         } else {
             new URLDataRequest( controllerURL )
                 .request( 'videoURL', data => {
-                    console.log(data)
                     videoData.videoURLs[ type ] = data.videoURL;
                 });
             GM_openInTab( controllerURL );
