@@ -1,8 +1,8 @@
 
 // ### IMPORTS ###
 
-import { GM_getObjValue, GM_setObjValue } from './gm-extras.js';
 import { storageVariables, types } from '../config.js';
+import { GM_getObjValue, GM_setObjValue } from './gm-extras.js';
 
 // ### MAIN ###
 // ? Used for communication across tabs

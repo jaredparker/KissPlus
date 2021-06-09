@@ -8,7 +8,7 @@ import Listener from '../lib/events.js';
 
 import { faviconURL } from '../config.js';
 import { awaitElement, awaitUndefined } from '../lib/await.js';
-import { SeriesData, VideoData } from '../utils/series-data.js';
+import { SeriesData, VideoData } from '../utils/data.js';
 import { setTabType, findTabType } from '../lib/tab-types.js';
 
 import VideoPlayerComponent from '../components/video-player.js';

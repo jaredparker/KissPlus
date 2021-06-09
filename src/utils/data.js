@@ -51,6 +51,7 @@ export class SeriesData {
         return this; // Support chaining
     }
 }
+
 export class VideoData {
     constructor( videoURL ){
         this.videoURL       = videoURL;

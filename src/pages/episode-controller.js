@@ -7,7 +7,7 @@ import Dictionaries from '../lib/dictionaries.js';
 import Listener from '../lib/events.js';
 
 import { awaitElement } from '../lib/await.js';
-import { SeriesData, VideoData, getSeriesID, getCurrentURL } from '../utils/series-data.js';
+import { SeriesData, VideoData, getSeriesID, getCurrentURL } from '../utils/data.js';
 import { findTabType, setTabType } from '../lib/tab-types.js';
 
 import OpenVideoComponent from '../components/open-video.js';

@@ -3,7 +3,7 @@
 
 import Dictionaries from '../lib/dictionaries.js';
 
-import { SeriesData, getFullURL, parseSeriesURL } from '../utils/series-data.js';
+import { SeriesData, getFullURL, parseSeriesURL } from '../utils/data.js';
 
 // ### INIT ###
 
