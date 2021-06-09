@@ -3,6 +3,9 @@
 
 import { autoHideWait } from '../config.js';
 
+import TimeFrame from '../lib/time-frame.js';
+import { awaitUndefined } from '../lib/await.js';
+
 import Component from '../lib/component.js';
 import styles from '../styles/video-player.scss';
 
@@ -10,18 +13,22 @@ import styles from '../styles/video-player.scss';
 
 export default class VideoPlayer extends Component {
 
-    constructor( appendTo, options ){
+    constructor( appendTo, options={} ){
         super( styles );
 
-        this.title = options.title;
-        this.subtitle = options.subtitle;
-        this.coverImage = options.coverImage;
+        this.options = options;
 
         this.build( appendTo );
 
+        this.setup();
+    }
+
+    async setup(){
+
         // - AUTO HIDE -
 
-        const $video = $( options.video );
+        const $video = $( this.options.video );
+        const video  = $video[0];
 
         let hideTimeout;
         
@@ -50,11 +57,13 @@ export default class VideoPlayer extends Component {
     }
 
     hide(){
+        console.log('hide');
         this.tree._element.addClass( styles.locals.hide );
         this.tree._element.removeClass( styles.locals.show );
     }
 
     show(){
+        console.log('show');
         this.tree._element.addClass( styles.locals.show );
         this.tree._element.removeClass( styles.locals.hide );
     }
@@ -65,11 +74,11 @@ export default class VideoPlayer extends Component {
 
         const videoTitle = [];
         
-        if( this.coverImage ){
+        if( this.options.coverImage ){
             videoTitle.push({
                 // Video Title Cover Image
                 tag: 'img',
-                src: this.coverImage
+                src: this.options.coverImage
             })
         }
         videoTitle.push({
@@ -79,11 +88,11 @@ export default class VideoPlayer extends Component {
             children: [
                 {
                     tag: 'h1',
-                    text: this.title
+                    text: this.options.title
                 },
                 {
                     tag: 'h2',
-                    text: this.subtitle
+                    text: this.options.subtitle
                 }
             ]
         });
@@ -110,15 +119,25 @@ export default class VideoPlayer extends Component {
                             // Previous Episode
                             tag: 'div',
                             classes: [ styles.locals.episodeButton, styles.locals.prev ],
-                            text: '◄  Previous Episode',
-                            click: () => this.trigger( 'clickedPrevEpisode' )
+                            click: () => this.trigger( 'clickedPrevEpisode' ),
+                            children: [
+                                {
+                                    tag: 'button',
+                                    text: '◄  Previous Episode'
+                                }
+                            ]
                         },
                         {
                             // Next Episode
                             tag: 'div',
                             classes: [ styles.locals.episodeButton, styles.locals.next ],
-                            text: '►  Next Episode',
-                            click: () => this.trigger( 'clickedNextEpisode' )
+                            click: () => this.trigger( 'clickedNextEpisode' ),
+                            children: [
+                                {
+                                    tag: 'button',
+                                    text: '►  Next Episode'
+                                }
+                            ]
                         }
                     ]
                 }

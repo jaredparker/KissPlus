@@ -1,18 +1,6 @@
 
 @import 'config';
 
-.show {
-    visibility: visible;
-    opacity: 1;
-    transition: visibility .1s, opacity .1s, width .1s;  
-}
-
-.hide {
-    visibility: visible;
-    opacity: 0;
-    transition: visibility 1s, opacity 1s, width 1s, margin 1s;
-}
-
 .wrapper {
     z-index: 10;
     position: absolute;
@@ -27,6 +15,20 @@
     * {
         box-sizing: border-box;
     }
+}
+
+.show .episodeButton,
+.show .title {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility .1s, opacity .1s, width .1s;  
+}
+
+.hide .episodeButton,
+.hide .title {
+    visibility: visible;
+    opacity: 0;
+    transition: visibility 1s, opacity 1s, width 1s, margin 1s;
 }
 
 /* ### VIDEO TITLE ### */
@@ -104,29 +106,33 @@
 }
 
 .episodeButton {
-    height: 60px;
-    line-height: normal;
-    padding: $padd-normal;
-    border-radius: 5px;
 
-    text-align: center;
-    box-sizing: border-box;
-    white-space: nowrap;
+    button {
+        height: 60px;
+        line-height: normal;
+        padding: $padd-normal;
+        border-radius: 5px;
+    
+        text-align: center;
+        box-sizing: border-box;
+        white-space: nowrap;
+    
+        font-family: Helvetica, sans-serif;
+        font-weight: bold;
+        font-size: 20px;
+    
+        transition: margin .3s, background-color .3s, width 1s, padding 1s;
+    
+        box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5);
+        border: none;
+    }
 
-    font-family: Helvetica, sans-serif;
-    font-weight: bold;
-    font-size: 20px;
-
-    transition: margin .3s, background-color .3s, width 1s, padding 1s;
-
-    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5);
-
-    &:hover {
+    &:hover button {
         cursor: pointer;
         margin-bottom: $padd-tiny;
     }
 
-    &.prev {
+    &.prev button {
         color: white;
         background-color: rgba( 50, 50, 50, .5 );
 
@@ -135,7 +141,7 @@
         }
     }
 
-    &.next {
+    &.next button {
         /* Progress bar effect */
         background: linear-gradient( to right, white 49%, lightgrey 49%, transparent 50% );
         background-size: 208% 100%;
