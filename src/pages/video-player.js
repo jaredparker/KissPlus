@@ -80,7 +80,10 @@ export async function execute(){
 
         title: seriesData.name,
         subtitle: episodeText,
-        coverImage: seriesData.coverImage
+        coverImage: seriesData.coverImage,
+
+        prevEp: !!videoData.controllerURLs[ types.episode.PREVIOUS ],
+        nextEp: !!videoData.controllerURLs[ types.episode.NEXT ]
 
     })
         .on( 'clickedNextEpisode', function(){

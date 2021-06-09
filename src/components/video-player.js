@@ -57,49 +57,50 @@ export default class VideoPlayer extends Component {
 
         // - AUTO PLAY -
 
-        const duration = await awaitUndefined( () => video.duration );
+        if( this.options.nextEp ){
 
-        new TimeFrame( video, duration - 20, duration + 1 )
-            .on( 'enter', () => {
-                console.log( 'enter' );
+            const duration = await awaitUndefined( () => video.duration );
 
-                const wrapper = this.get( 'nextBtnWrap' );
-                const button  = this.get( 'nextBtn' );
+            new TimeFrame( video, duration - 20, duration + 1 )
+                .on( 'enter', () => {
+                    
+                    const wrapper = this.get( 'nextBtnWrap' );
+                    const button  = this.get( 'nextBtn' );
 
-                wrapper.addClass( styles.locals.show );
+                    wrapper.addClass( styles.locals.show );
 
-                if( !video.paused ){
+                    if( !video.paused ){
 
-                    // EVENT - Prefetch next video
-                    this.trigger( 'prepareNextVideo' );
+                        // EVENT - Prefetch next video
+                        this.trigger( 'prepareNextVideo' );
 
-                    // Timeout till to start next episode (time to cancel)
-                    const waitTime = Math.max( duration - video.currentTime, 5 );
+                        // Timeout till to start next episode (time to cancel)
+                        const waitTime = Math.max( duration - video.currentTime, 5 );
 
-                    button.css( 'animation', `${ styles.locals.slide } ${ waitTime }s linear forwards` );
-                    let nextEpisodeTimeout = setTimeout( ()=>{
+                        button.css( 'animation', `${ styles.locals.slide } ${ waitTime }s linear forwards` );
+                        let nextEpisodeTimeout = setTimeout( ()=>{
 
-                        // Show next episode loading
-                        wrapper.trigger('activate:spinner');
-    
-                        // EVENT - Start next video
-                        this.trigger( 'startNextVideo' );
-    
-                    }, waitTime * 1000 );
+                            // Show next episode loading
+                            wrapper.trigger('activate:spinner');
+        
+                            // EVENT - Start next video
+                            this.trigger( 'startNextVideo' );
+        
+                        }, waitTime * 1000 );
 
-                    // Auto next episode cancel ( pauses video, or seeks )
-                    $video.one('pause', function(){
-                        if( video.currentTime + 0.1 < duration ){
-                            clearTimeout( nextEpisodeTimeout );
-                            button.css( 'animation', '' );
-                        }
-                    });
-                }
-            })
-            .on( 'exit', () => {
-                console.log( 'exit' );
-                this.get( 'nextBtnWrap' ).removeClass( styles.locals.show );
-            });
+                        // Auto next episode cancel ( pauses video, or seeks )
+                        $video.one('pause', function(){
+                            if( video.currentTime + 0.1 < duration ){
+                                clearTimeout( nextEpisodeTimeout );
+                                button.css( 'animation', '' );
+                            }
+                        });
+                    }
+                })
+                .on( 'exit', () => {
+                    this.get( 'nextBtnWrap' ).removeClass( styles.locals.show );
+                });
+        }
     }
 
     hide(){
@@ -143,6 +144,69 @@ export default class VideoPlayer extends Component {
 
         // - EPISODE BUTTONS -
 
+        const episodeButtons = [];
+
+        if( this.options.prevEp ){
+            episodeButtons.push({
+                // Previous Episode
+                tag: 'div',
+                ref: 'prevBtnWrap',
+                classes: [ styles.locals.episodeButton, styles.locals.prev ],
+                events: {
+                    'click': () => {
+                        this.get('prevBtnWrap').trigger('activate:spinner');
+                        this.trigger('clickedPrevEpisode');
+                    },
+                    'activate:spinner': () => {
+                        this.get('prevBtnWrap').addClass( styles.locals.show );
+                        this.get('prevBtn')
+                            .text('Previous Episode')
+                            .append(
+                                $('<div/>').addClass( styles.locals.spinner )
+                            );
+                    }
+                },
+                children: [
+                    {
+                        tag: 'button',
+                        ref: 'prevBtn',
+                        text: '◄  Previous Episode'
+                    }
+                ]
+            });
+        }
+        if( this.options.nextEp ){
+            episodeButtons.push({
+                // Next Episode
+                tag: 'div',
+                ref: 'nextBtnWrap',
+                classes: [ styles.locals.episodeButton, styles.locals.next ],
+                events: {
+                    'click': () => {
+                        this.get('nextBtnWrap').trigger('activate:spinner');
+                        this.trigger('clickedNextEpisode');
+                    },
+                    'activate:spinner': () => {
+                        this.get('nextBtnWrap').addClass( styles.locals.show );
+                        this.get('nextBtn')
+                            .text('Next Episode')
+                            .append(
+                                $('<div/>').addClass( styles.locals.spinner )
+                            );
+                    }
+                },
+                children: [
+                    {
+                        tag: 'button',
+                        ref: 'nextBtn',
+                        text: '►  Next Episode'
+                    }
+                ]
+            })
+        }
+
+        // # RENDER #
+
         return {
             // Wrapper
             tag: 'div',
@@ -158,62 +222,7 @@ export default class VideoPlayer extends Component {
                     // Episode Buttons
                     tag: 'div',
                     classes: [ styles.locals.episodeButtons ],
-                    children: [
-                        {
-                            // Previous Episode
-                            tag: 'div',
-                            ref: 'prevBtnWrap',
-                            classes: [ styles.locals.episodeButton, styles.locals.prev ],
-                            events: {
-                                'click': () => {
-                                    this.get('prevBtnWrap').trigger('activate:spinner');
-                                    this.trigger('clickedPrevEpisode');
-                                },
-                                'activate:spinner': () => {
-                                    this.get('prevBtnWrap').addClass( styles.locals.show );
-                                    this.get('prevBtn')
-                                        .text('Previous Episode')
-                                        .append(
-                                            $('<div/>').addClass( styles.locals.spinner )
-                                        );
-                                }
-                            },
-                            children: [
-                                {
-                                    tag: 'button',
-                                    ref: 'prevBtn',
-                                    text: '◄  Previous Episode'
-                                }
-                            ]
-                        },
-                        {
-                            // Next Episode
-                            tag: 'div',
-                            ref: 'nextBtnWrap',
-                            classes: [ styles.locals.episodeButton, styles.locals.next ],
-                            events: {
-                                'click': () => {
-                                    this.get('nextBtnWrap').trigger('activate:spinner');
-                                    this.trigger('clickedNextEpisode');
-                                },
-                                'activate:spinner': () => {
-                                    this.get('nextBtnWrap').addClass( styles.locals.show );
-                                    this.get('nextBtn')
-                                        .text('Next Episode')
-                                        .append(
-                                            $('<div/>').addClass( styles.locals.spinner )
-                                        );
-                                }
-                            },
-                            children: [
-                                {
-                                    tag: 'button',
-                                    ref: 'nextBtn',
-                                    text: '►  Next Episode'
-                                }
-                            ]
-                        }
-                    ]
+                    children: episodeButtons
                 }
             ]
 
