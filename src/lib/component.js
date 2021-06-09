@@ -4,6 +4,7 @@
 export default class Component {
     constructor( styles ){
         this._events = {};
+        this._refs   = {};
 
         // - Load styles -
 
@@ -24,8 +25,7 @@ export default class Component {
     createNodeChildren( children, appendTo ){
 
         for( let el of children ){
-            const $el   = this.createNode(el)
-            el._element = $el;
+            const $el   = this.createNode(el);
             
             $el.appendTo( appendTo );
 
@@ -37,12 +37,17 @@ export default class Component {
     }
 
     // Create a new element
-    createNode({ tag, classes, text, src, click }){
+    createNode( element ){
+        const { tag, classes, ref, events, text, src, click } = element;
 
         const $el = $(`<${tag}/>`);
+        element._element = $el;
     
         if( classes ){
             $el.addClass( classes.join(' ') );
+        }
+        if( ref ){
+            this._refs[ ref ] = $el;
         }
         if( text ){
             $el.text( text );
@@ -53,13 +58,24 @@ export default class Component {
         if( click ){
             $el.click( click );
         }
+        if( events ){
+            for( let event of Object.keys( events ) ){
+                $el.on( event, events[ event ] );
+            }
+        }
 
         return $el;
+    }
+
+    get( ref ){
+        return this._refs[ ref ];
     }
 
     // ### EVENTS ###
 
     trigger( eventName ){
+        if( !this._events[ eventName ] ) return this;
+
         for( let event of this._events[ eventName ] ){
             event.call( this );
         }
