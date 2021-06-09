@@ -30,35 +30,33 @@ export default class VideoPlayer extends Component {
         const $video = $( this.options.video );
         const video  = $video[0];
 
-        let hoveredVideo = $video.is(':hover');
         let hideTimeout;
         
         const resetTimeout = () => {
-            clearTimeout( hideTimeout );
-            hideTimeout = setTimeout( () => this.hide(), autoHideWait );
+            if( !video.paused ){
+                clearTimeout( hideTimeout );
+                hideTimeout = setTimeout( () => this.hide(), autoHideWait );
+            }
         }
 
-        const onMouseMove = () => {
-            $video.on( 'mousemove', () => {
+        const start = () => {
+            resetTimeout();
+            
+            $(window).on( 'mousemove', () => {
                 this.show();
-                resetTimeout();
+                if( $video.is( ':hover' ) ){
+                    resetTimeout();
+                }
             });
         }
 
-        function start(){
-            resetTimeout();
-            onMouseMove();
-        }
-
-        function stop(){
+        const stop = () => {
             clearTimeout( hideTimeout );
             $video.off( 'mousemove' );
         }
 
         $video.on( 'play', () => {
-            if( hoveredVideo ){
-                start();
-            }
+            start();
         });
 
         $video.on( 'pause', () => {
@@ -67,11 +65,9 @@ export default class VideoPlayer extends Component {
         });
 
         $video.on( 'mouseenter', () => {
-            hoveredVideo = true;
             start();
         });
         $video.on( 'mouseleave', () => {
-            hoveredVideo = false;
             stop();
         });
 
