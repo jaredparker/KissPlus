@@ -126,11 +126,13 @@ export default class VideoPlayer extends Component {
     hide(){
         this.tree._element.addClass( styles.locals.hide );
         this.tree._element.removeClass( styles.locals.show );
+        document.body.style.cursor = 'none';
     }
 
     show(){
         this.tree._element.addClass( styles.locals.show );
         this.tree._element.removeClass( styles.locals.hide );
+        document.body.style.cursor = 'auto';
     }
 
     render(){
