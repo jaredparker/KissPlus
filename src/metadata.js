@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         KissPlus
 // @namespace    https://github.com/jaredparker/
-// @version      0.0.1
+// @version      0.1.0
 // @description  Script that adds a custom video player to streaming sites with features such as autoplay.
 // @author       Jared Parker
-// @match        https://kissanime.com.ru/*
+// @match        *://*/*
 // @icon         https://www.google.com/s2/favicons?domain=tampermonkey.net
+// @noframes
 
 // @grant        GM_setValue
 // @grant        GM_deleteValue
