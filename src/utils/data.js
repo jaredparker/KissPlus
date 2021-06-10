@@ -154,6 +154,10 @@ export function getControllerURLs(){
 export function getCurrentURL(){
     const episode = getCurrentEpisodeURL();
 
+    if( !episode ){
+        return window.location.href;
+    }
+
     return episode;
 }
 
@@ -182,7 +186,7 @@ export function getNextEpisodeURL(){
 
 export function getEpisodeURL( hrefs, origin ){
     for( let href of hrefs ){
-        if( href ){
+        if( href && href != '#' ){
             const fullURL = getFullURL( href, origin );
             const server  = new URL(window.location).searchParams.get('s');
 

@@ -74,7 +74,6 @@ export async function execute(){
             }
         });
 
-        
     new URLDataRequest( getCurrentURL() )
         .respond( 'videoURL', {videoURL} );
 
