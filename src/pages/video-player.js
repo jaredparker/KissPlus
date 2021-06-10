@@ -74,6 +74,8 @@ export async function execute(){
         :
             videoData.episode.name // Episode type not specified
 
+    console.log( videoData.controllerURLs );
+
     new VideoPlayerComponent( 'body', {
 
         video: 'video',

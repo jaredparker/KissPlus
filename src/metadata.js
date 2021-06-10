@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         KissPlus
 // @namespace    https://github.com/jaredparker/
-// @version      0.1.0
+// @version      0.1.1
 // @description  Script that adds a custom video player to streaming sites with features such as autoplay.
 // @author       Jared Parker
 // @match        *://*/*
