@@ -8,7 +8,7 @@ A tampermonkey script that adds a custom video player to streaming sites with fe
 3) Navigate to the **Utilities** tab.
 4) Insert the following script URL into the **"Install from URL"** text box.
 
-   `https://github.com/jaredparker/KissPlus/releases/download/v0.1.0-beta/kissplus.jaredparker.js`
+   `https://github.com/jaredparker/KissPlus/releases/download/v0.1.1-beta/kissplus.jaredparker.js`
 
    > *Note: If you want to use a different version you can find all the releases [here](https://github.com/jaredparker/KissPlus/releases).*
    
